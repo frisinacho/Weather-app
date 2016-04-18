@@ -10,6 +10,8 @@ import {Weather} from './weather';
     selector : 'my-app',
     template : `
         <h1>Weather App</h1>
+        
+        <input [(ngmodel)]="city" placeholder="Search weather for your city">
         <h2>This is the weather forecast in {{ city }}</h2>
         
         <ul>
