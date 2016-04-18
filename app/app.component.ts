@@ -54,4 +54,14 @@ export class AppComponent {
         }
         return weather;
     }
+
+    addCity = function (city:string, $event) {
+        if ($event.keyCode == 13) {
+            var weather = this.getWeather(city);
+            if (weather) {
+                this.weatherOfCities.push(this.getWeather(city));
+            }
+            this.city = "";
+        }
+    }
 }
