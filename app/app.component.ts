@@ -11,7 +11,7 @@ import {Weather} from './weather';
     template : `
         <h1>Weather App</h1>
         
-        <input [(ngmodel)]="city" placeholder="Search weather for your city">
+        <input [(ngModel)]="city" placeholder="Search weather for your city" (keyup)="addCity(city, $event)">
         <h2>This is the weather forecast in {{ city }}</h2>
         
         <ul *ngFor="#weather of weatherOfCities">
