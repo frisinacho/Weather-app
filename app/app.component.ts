@@ -26,12 +26,12 @@ import {Weather} from './weather';
     `
 })
 export class AppComponent {
-    city:string;
-    weather:Weather;
+    public city:string;
+    public cities:Array<string>;
+    public weatherOfCities:Array<Weather>;
 
     constructor() {
-        this.city = "Stockholm";
-
-        this.weather = new Weather(1, "London", "cloudy", "Fully cloudy");
+        this.city = "";
+        this.weatherOfCities = [];
     }
 }
