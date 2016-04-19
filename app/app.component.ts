@@ -9,19 +9,23 @@ import {Weather} from './weather';
 @Component({
     selector : 'my-app',
     template : `
-        <h1>Weather App</h1>
+        <header>
+            <h1>Weather App</h1>
+        </header>
         
-        <input [(ngModel)]="city" placeholder="Search weather for your city" (keyup)="addCity(city, $event)">
-        
-        <ul *ngFor="#weather of weatherOfCities">
-            <li>
-                <h2>{{ weather.city }}:</h2>
-                <ul>
-                    <li>Weather type: {{ weather.main }}</li>
-                    <li>Weather description: {{ weather.description }}</li>
-                </ul>
-            </li>
-        </ul>
+        <div class="content">
+            <input [(ngModel)]="city" placeholder="Search weather for your city" (keyup)="addCity(city, $event)">
+            
+            <ul *ngFor="#weather of weatherOfCities">
+                <li>
+                    <h2>{{ weather.city }}:</h2>
+                    <ul>
+                        <li>Weather type: {{ weather.main }}</li>
+                        <li>Weather description: {{ weather.description }}</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
     `
 })
 export class AppComponent {
