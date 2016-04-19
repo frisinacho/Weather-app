@@ -26,7 +26,26 @@ import {Weather} from './weather';
                 </li>
             </ul>
         </div>
-    `
+    `,
+    styles : [`
+        header h1 {
+            padding: 10px;
+            background: #5F9EA0;
+            color: #F5F5F5;
+            text-shadow: 1px 1px 4px #808080;
+        }
+        .content {
+            padding: 10px;
+        }
+        input {
+            font-size: 16px;
+            padding: 4px;
+        }
+        .weather-card {
+            border-bottom: 1px solid #D3D3D3;
+            padding-bottom: 10px;
+        }
+    `]
 })
 export class AppComponent {
     public city:string;
