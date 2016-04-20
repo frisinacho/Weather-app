@@ -15,6 +15,7 @@ import {Weather} from './weather';
         
         <div class="content">
             <input [(ngModel)]="city" placeholder="Search weather for your city" (keyup)="addCity(city, $event)">
+            <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p> 
             
             <ul *ngFor="#weather of weatherOfCities">
                 <li>
@@ -45,12 +46,17 @@ import {Weather} from './weather';
             border-bottom: 1px solid #D3D3D3;
             padding-bottom: 10px;
         }
+        .error-message {
+            color : red;
+            font-size: 8px;
+        }
     `]
 })
 export class AppComponent {
     public city:string;
     public cities:Array<string>;
     public weatherOfCities:Array<Weather>;
+    public errorMessage:string;
 
     constructor() {
         this.city = "";
@@ -58,6 +64,7 @@ export class AppComponent {
     }
 
     getWeather = function (city:string) {
+        this.errorMessage = ""; // Cleaning errorMessage line
         var weather:Weather;
         if (city.toLocaleLowerCase() == "stockholm") {
             weather = {
@@ -73,6 +80,8 @@ export class AppComponent {
                 "main" : "Rain",
                 "description" : "Very heavy rain"
             };
+        } else {
+            this.errorMessage = "This city doesn't exist";
         }
         return weather;
     }
