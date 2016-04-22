@@ -19,24 +19,19 @@ export class WeatherService {
         return this.weatherApiURL + "&q=" + city;
     }
 
-    getWeather = function (city:string) {
-        var weather:Weather;
-        if (city.toLocaleLowerCase() == "stockholm") {
-            weather = {
-                "id" : 1,
-                "city" : "Stockholm",
-                "main" : "Clouds",
-                "description" : "Overcast clouds"
-            };
-        } else if (city.toLocaleLowerCase() == "london") {
-            weather = {
-                "id" : 2,
-                "city" : "London",
-                "main" : "Rain",
-                "description" : "Very heavy rain"
-            };
-        }
-
-        return weather;
+    getWeather(city:string) {
+        return new Observable(observable => {
+            this._http.get(this.getWeatherURL(city))
+                .map(res => res.json())
+                .subscribe(res => {
+                    if (res.cod == "404") {
+                        observable.error(res.message);
+                    } else {
+                        var weather:Weather = res.weather[0];
+                        weather.city = city;
+                        observable.next(weather);
+                    }
+                });
+        });
     }
 }
