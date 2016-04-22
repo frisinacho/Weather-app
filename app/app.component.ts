@@ -6,6 +6,7 @@ import {Component} from 'angular2/core';
 
 import {Weather} from './weather';
 import {WeatherService} from './weather.service';
+import {generateErrorMessage} from "angular2/src/compiler/css/lexer";
 
 @Component({
     selector : 'my-app',
@@ -67,11 +68,20 @@ export class AppComponent {
 
     addCity (city:string, $event) {
         if ($event.keyCode == 13) {
-            var weather = this.weatherService.getWeather(city);
-            if (weather) {
-                this.weatherOfCities.push(weather);
-            }
-            this.city = "";
+            this.weatherService.getWeather(city)
+                .subscribe(weather => {
+                    if (weather) {
+                        this.weatherOfCities.push(weather);
+                        this.errorMessage = undefined;
+                    } else {
+                        var cityWithoutWeather = city;
+                        this.errorMessage = "* There is no weather data for " + cityWithoutWeather;
+                    }
+                    this.city = "";
+                }, error => {
+                    this.city = "";
+                    this.errorMessage = error;
+                });
         }
     }
 }
