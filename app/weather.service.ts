@@ -11,12 +11,13 @@ import {Weather} from './weather';
 @Injectable()
 export class WeatherService {
 
-    private weatherApiURL:string = "http://api.openweathermap.org/data/2.5/weather?appid=44db6a862fba0b067b1930da0d769e98"; // Alejando Rangel's API
+    private weatherApiURL:string = "http://api.openweathermap.org/data/2.5/weather?";
+    private weatherApiKey:string = "d2d6d18ab7d92ecd6bcea3deda3dc8d8";    // My personal key
 
     constructor(private _http:Http) {}
 
     getWeatherURL(city:string) {
-        return this.weatherApiURL + "&q=" + city;
+        return this.weatherApiURL + "q=" + city + "&APPID=" + this.weatherApiKey;
     }
 
     getWeather(city:string) {
